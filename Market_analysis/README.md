@@ -15,7 +15,7 @@ Then save your OpenAI API key here: ```configs/openai_api_key.txt```
 __Running the app__<br/><br/>
 Activate the virtual environment<br/>
 ```source .venv/bin/activate```<br/>
-Then run the following command: ```streamlit run src/main.py```
+Then run the following command: ```streamlit run src/app.py```
 
 __Running unit tests__<br/><br/>
 ```python -m unittest discover -s tests -p '*_test.py'```

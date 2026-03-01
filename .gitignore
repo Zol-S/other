@@ -1,3 +1,2 @@
 .ipynb_checkpoints
-docs/*
-input/*
+.DS_Store
