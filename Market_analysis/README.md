@@ -8,16 +8,16 @@ __Usage__: Ask any question related to a publicly traded company or stock.
 __Monitoring & logging__: Ask any question related to a publicly traded company or stock. The chart shows the usage within the session, groups successful and failed recommendation generations. A monitoring alert can be set up if the number of failed recommendations are higher than a predefined threshold.
 
 ## Usage
-__Installation__
+__Installation__<br/><br/>
 Type ```uv sync```<br/>
 Then save your OpenAI API key here: ```configs/openai_api_key.txt```
 
-__Running the app__
+__Running the app__<br/><br/>
 Activate the virtual environment<br/>
 ```source .venv/bin/activate```<br/>
 Then run the following command: ```streamlit run src/main.py```
 
-__Running unit tests__
+__Running unit tests__<br/><br/>
 ```python -m unittest discover -s tests -p '*_test.py'```
 
 ## Hosting ideas
