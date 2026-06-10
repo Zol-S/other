@@ -3,7 +3,7 @@
 ## How did you choose to define churn and why?
 The churn threshold (in days) vs percentage of accounts affected are shown on a chart, that shows that the accounts affected rises quickly for small thresholds, then starts to flatten after ~8–10 days. The tangential point is at 8 days ("elbow point"), before that increasing the threshold gives more coverage quickly and after the 8 days' threshold gains slow down significantly. 8 days is a reasonable balance point.
 
-[images/churn_threshold_vs_percentage_of_accounts.png](Churn threshold vs Percentage of accounts affected)
+<img src="images/churn_threshold_vs_percentage_of_accounts.png">
 
 ## What model have you built to predict it, and why did you choose this model?
 Once the churn threshold is set to 8 days, I have prepared 2 different versions of training sets:
@@ -71,7 +71,7 @@ Build a wrapper class and API backend around it, then create a Docker container,
 Unfortunately serverless is most probably not an option since data science packages are huge and on AWS there is a strict 250MB limit for Lambdas. Lambdas would be cheaper as it is billed after running the script only, but it has a cold start problem, that might be a problem.
 
 # Usage
-`source .venv/bin/activate`
+`source .venv/bin/activate`<br/>
 `python inference.py --model_path=output/gradient_boosting_churn_model_20260610.pkl --csv_path=output/training_set_aggregated.csv --output_path=result.csv`
 Where
 - __model_path__ is the path to model
