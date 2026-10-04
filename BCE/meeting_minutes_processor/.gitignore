@@ -4,7 +4,14 @@ __pycache__/
 build/
 dist/
 wheels/
+.ipynb_checkpoints
 *.egg-info
 
 # Virtual environments
 .venv
+
+anthropic.key
+output/
+input/
+checkpoints/
+senate_meeting_minutes/

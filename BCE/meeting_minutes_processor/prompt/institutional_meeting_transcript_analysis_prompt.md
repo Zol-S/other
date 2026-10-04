@@ -95,14 +95,14 @@ For every segment provide:
 
 Example:
 
-{
+{{
 "segment_id": "S3",
 "title": "Postponement of the V4 conference",
 "location": "Pages 4-10",
 "summary": "Participants discuss the postponement of the conference, political sensitivity, academic freedom, institutional neutrality, and the role of university management.",
 "actor_ids": ["A1", "A2", "A3"],
 "concept_ids": ["C1", "C2", "C3"]
-}
+}}
 
 ---
 
@@ -312,10 +312,10 @@ If several statements support the classification, provide a concise synthesis ra
 
 Example:
 
-{
+{{
 "attitude": "negative",
 "evidence": "Eszter describes the postponement as censorship based on political grounds and questions why an academic event should be postponed because of political considerations."
-}
+}}
 
 Do not invent evidence.
 
@@ -416,30 +416,30 @@ This distinction is important:
 
 Example:
 
-{
-"attitude_matrix": {
+{{
+"attitude_matrix": {{
 "actors": [
-{
+{{
 "actor_id": "A1",
 "actor": "Bruno van Pottelsberghe",
-"attitudes": {
+"attitudes": {{
 "C1": "positive",
 "C2": "neutral",
 "C3": "negative"
-}
-},
-{
+}}
+}},
+{{
 "actor_id": "A2",
 "actor": "Eszter Kirs",
-"attitudes": {
+"attitudes": {{
 "C1": "negative",
 "C2": "positive",
 "C3": "not_discussed"
-}
-}
+}}
+}}
 ]
-}
-}
+}}
+}}
 
 The matrix is a summary of the detailed actor-concept relationships.
 
@@ -455,27 +455,27 @@ Use a structured matrix representation rather than only a string value.
 
 For example:
 
-{
+{{
 "actor_id": "A1",
 "actor": "Bruno van Pottelsberghe",
-"attitudes": {
-"C1": {
+"attitudes": {{
+"C1": {{
 "attitude": "positive",
 "confidence": 0.94,
 "segment_ids": ["S3"]
-},
-"C2": {
+}},
+"C2": {{
 "attitude": "neutral",
 "confidence": 0.88,
 "segment_ids": ["S3", "S4"]
-},
-"C3": {
+}},
+"C3": {{
 "attitude": "not_discussed",
 "confidence": null,
 "segment_ids": []
-}
-}
-}
+}}
+}}
+}}
 
 This makes the matrix traceable back to the original discussion.
 
@@ -495,11 +495,11 @@ The purpose is to represent the discussion faithfully.
 
 Example:
 
-{
+{{
 "concept_id": "C1",
 "concept": "Postponement of the conference",
 "summary_of_positions": "Some participants describe the postponement as a reasonable temporary measure to avoid political sensitivity, while others view it as inappropriate interference with an academic event."
-}
+}}
 
 When positions are disputed, attribute them to the relevant actors rather than presenting a disputed interpretation as an objective fact.
 
@@ -523,19 +523,19 @@ Do not invent vote counts.
 
 For example:
 
-{
+{{
 "vote_id": "V1",
 "subject": "Amendment of the Rules of Procedure of the Senate",
 "segment_id": "S2",
 "proposal": "Amend the Rules of Procedure in Hungarian and English.",
 "result": "not explicitly reported",
 "individual_votes": [
-{
+{{
 "actor_id": "A3",
 "vote": "abstain"
-}
+}}
 ]
-}
+}}
 
 If a vote is mentioned but the result is not available, use:
 
@@ -555,30 +555,30 @@ Do not return explanations outside the JSON.
 
 Use exactly this overall structure:
 
-{
+{{
 "contains_conversation": 0,
 "contains_voting": 0,
 
 "discussion_segments": [
-{
+{{
 "segment_id": "S1",
 "title": "Short discussion title",
 "location": "Approximate location",
 "summary": "Concise summary",
 "actor_ids": ["A1", "A2"],
 "concept_ids": ["C1", "C2"]
-}
+}}
 ],
 
 "actors": [
-{
+{{
 "actor_id": "A1",
 "actor": "Full name"
-}
+}}
 ],
 
 "concepts_discussed": [
-{
+{{
 "concept_id": "C1",
 "concept": "Concept name",
 "description": "Concise description",
@@ -587,57 +587,57 @@ Use exactly this overall structure:
 
 ```
   "actor_attitudes": [
-    {
+    {{
       "actor_id": "A1",
       "attitude": "positive",
       "confidence": 0.95,
       "evidence": "Concise supporting evidence",
       "discussion_segment_ids": ["S1"]
-    }
+    }}
   ]
-}
+}}
 
 ```
 
 ],
 
-"attitude_matrix": {
+"attitude_matrix": {{
 "actors": [
-{
+{{
 "actor_id": "A1",
 "actor": "Full name",
-"attitudes": {
-"C1": {
+"attitudes": {{
+"C1": {{
 "attitude": "positive",
 "confidence": 0.95,
 "segment_ids": ["S1"]
-},
-"C2": {
+}},
+"C2": {{
 "attitude": "not_discussed",
 "confidence": null,
 "segment_ids": []
-}
-}
-}
+}}
+}}
+}}
 ]
-},
+}},
 
 "voting_events": [
-{
+{{
 "vote_id": "V1",
 "subject": "Subject of vote",
 "segment_id": "S1",
 "proposal": "Proposal being voted on",
 "result": "Result if explicitly stated, otherwise 'not explicitly reported'",
 "individual_votes": [
-{
+{{
 "actor_id": "A1",
 "vote": "yes | no | abstain | unclear"
-}
+}}
 ]
-}
+}}
 ]
-}
+}}
 
 ---
 
@@ -694,6 +694,6 @@ Before returning the JSON, verify:
 
 —————
 
-[INSERT TRANSCRIPT HERE]
+{:}
 
 —————
