@@ -1,0 +1,5 @@
+Please implement a Chrome extension that is an article hider for index.hu. Ways of desired operation:
+- The application starts when the onDOMready event is fired, the blocked_keywords.yaml file is loaded and the articles containing any of the keywords listed in the blocked_keywords.yaml file becomes hidden
+- When the user clicks on the icon, the application turns into learning mode, and if the user hovers the mouse over any of the "div.cimlap_anyag" or "div#pp-box li.pp-post" (save these into a config.yaml file with a section for "index.hu" listing all the CSS selectors), then it will be highlighted
+- If the user clicks it, the a modal window appears that contains an input box containing the title of the article, here the user can change or add keywords that are added to the blocked_keywords.yaml file if the user hits either the enter or clicks the Add button
+- When the page loads show a popup message in the top right corner of the viewport showing the number of articles hidden for 3 seconds

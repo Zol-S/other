@@ -1,0 +1,6 @@
+# Site-specific CSS selectors for article containers
+# Used for both hiding and learning-mode highlight/click
+
+index.hu:
+  - div.cimlap-anyag
+  - div#pp-box li.pp-post
