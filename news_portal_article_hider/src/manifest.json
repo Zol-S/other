@@ -1,14 +1,18 @@
 {
   "manifest_version": 3,
   "name": "News Portal Article Disabler",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Hides articles on news portals based on blocked keywords. Click the icon to add new keyword to be blocked.",
   "permissions": [
     "storage",
     "activeTab"
   ],
   "host_permissions": [
-    "https://index.hu/*"
+    "https://24.hu",
+	"https://444.hu",
+	"https://index.hu",
+	"https://origo.hu",
+	"https://telex.hu"
   ],
   "background": {
     "service_worker": "background.js"
@@ -16,7 +20,11 @@
   "content_scripts": [
     {
       "matches": [
-        "https://index.hu/*"
+            "https://24.hu/*",
+			"https://444.hu/*",
+			"https://index.hu/*",
+			"https://origo.hu/*",
+			"https://telex.hu/*"
       ],
       "js": ["content.js"],
       "css": ["styles/content.css"],
@@ -39,7 +47,13 @@
   "web_accessible_resources": [
     {
       "resources": ["blocked_keywords.yaml", "config.yaml"],
-      "matches": ["https://index.hu/*"]
+      "matches": [
+		"https://24.hu/*",
+		"https://444.hu/*",
+		"https://index.hu/*",
+		"https://origo.hu/*",
+		"https://telex.hu/*"
+	  ]
     }
   ]
 }

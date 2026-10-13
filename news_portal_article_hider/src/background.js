@@ -1,9 +1,80 @@
 const LEARNING_MODE_KEY = 'learningMode';
 
+// Cached list of domains read from config.yaml (e.g. ["24.hu", "444.hu", ...])
+let supportedDomains = null;
+
+/**
+ * Parse top-level keys from config.yaml.
+ * Keys are expected to be domain names (no leading whitespace, end with ':').
+ */
+function parseDomainsFromConfig(text) {
+	const domains = [];
+	const lines = text.split(/\r?\n/);
+
+	for (const raw of lines) {
+		const trimmed = raw.trim();
+		if (!trimmed || trimmed.startsWith('#')) continue;
+
+		// Top-level key: "domain.hu:" or "domain.hu: "
+		if (/^[^\s].*:$/.test(trimmed) || /^[^\s].*:\s*$/.test(trimmed)) {
+			const key = trimmed.replace(/:\s*$/, '').trim();
+			if (key) domains.push(key);
+		}
+	}
+
+	return domains;
+}
+
+/**
+ * Load (and cache) the list of supported domains from config.yaml.
+ */
+async function getSupportedDomains() {
+	if (supportedDomains !== null) return supportedDomains;
+
+	try {
+		const url = chrome.runtime.getURL('config.yaml');
+		const resp = await fetch(url);
+		if (!resp.ok) {
+			console.warn('[IAH] Failed to fetch config.yaml:', resp.status);
+			supportedDomains = [];
+			return supportedDomains;
+		}
+		const text = await resp.text();
+		supportedDomains = parseDomainsFromConfig(text);
+		console.log('[IAH] Supported domains loaded from config.yaml:', supportedDomains);
+	} catch (e) {
+		console.warn('[IAH] Error loading config.yaml:', e);
+		supportedDomains = [];
+	}
+
+	return supportedDomains;
+}
+
+/**
+ * Return true if the given URL belongs to a supported site.
+ */
+function isSupportedUrl(url, domains) {
+	if (!url || !domains || domains.length === 0) return false;
+
+	let hostname;
+	try {
+		hostname = new URL(url).hostname;
+	} catch {
+		return false;
+	}
+
+	return domains.some(
+		(domain) => hostname === domain || hostname.endsWith('.' + domain)
+	);
+}
+
 // Toggle learning mode when extension icon is clicked
 chrome.action.onClicked.addListener(async (tab) => {
-	if (!tab.id || !tab.url || !tab.url.includes('index.hu')) { // change this
-		// Optionally notify user, but for simplicity just ignore
+	if (!tab.id || !tab.url) return;
+
+	const domains = await getSupportedDomains();
+	if (!isSupportedUrl(tab.url, domains)) {
+		// Not on a supported site – ignore the click
 		return;
 	}
 
@@ -37,7 +108,7 @@ chrome.action.onClicked.addListener(async (tab) => {
 
 // Keep badge in sync if storage changes from elsewhere
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && changes[LEARNING_MODE_KEY]) {
-    // Badge is per-tab, so we leave it; content script handles UI
-  }
+	if (area === 'local' && changes[LEARNING_MODE_KEY]) {
+		// Badge is per-tab, so we leave it; content script handles UI
+	}
 });
